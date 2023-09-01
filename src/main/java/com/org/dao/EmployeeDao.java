@@ -7,6 +7,11 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
+import javax.servlet.http.HttpSession;
+
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.org.dto.Employee;
 
@@ -43,7 +48,7 @@ public class EmployeeDao {
     	 return false;
      }
      }
-     public static boolean deleteEmployee(int id) {
+     public static boolean deleteEmployee1(int id) {
     	 EntityManager em=emf.createEntityManager();
     	 EntityTransaction et=em.getTransaction();
     	 
@@ -58,6 +63,22 @@ public class EmployeeDao {
     		 return true;
     	 }
     	 
+     }
+     @RequestMapping("/get")
+     public String getEmployee(HttpSession hs) {
+    	 ModelAndView mav=new ModelAndView("Display.jsp");
+    	 List<Employee> emps=EmployeeDao.getAllEmployees();
+    	 hs.setAttribute("emps",emps);
+    	 return "display.jsp";
+     }
+     @RequestMapping("/delete")
+     public ModelAndView deleteEmployee(@RequestParam int id) {
+    	 ModelAndView mav=new ModelAndView("get");
+    	boolean res=EmployeeDao.deleteEmployee1(id);
+    	if(res) {
+    		mav.addObject("msg","data deleted sucessfully");
+    	}
+    	return mav;
      }
 }
     	 
