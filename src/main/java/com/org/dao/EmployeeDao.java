@@ -31,7 +31,7 @@ public class EmployeeDao {
     	 }
      }
      
-     public static List<Employee> getAllEmployees(){
+     public static List<Employee> getAllEmployee(){
     	 EntityManager em=emf.createEntityManager();
     	 Query q=em.createQuery("SELECT e FROM Employee e"); 	 
 		return q.getResultList();
@@ -48,7 +48,7 @@ public class EmployeeDao {
     	 return false;
      }
      }
-     public static boolean deleteEmployee1(int id) {
+     public static boolean deleteEmployee(int id) {
     	 EntityManager em=emf.createEntityManager();
     	 EntityTransaction et=em.getTransaction();
     	 
@@ -64,21 +64,18 @@ public class EmployeeDao {
     	 }
     	 
      }
+     public static Employee findById(int id) {
+    	 EntityManager em=emf.createEntityManager();
+    	 return em.find(Employee.class, id);
+     }
+     
+     
      @RequestMapping("/get")
      public String getEmployee(HttpSession hs) {
     	 ModelAndView mav=new ModelAndView("Display.jsp");
-    	 List<Employee> emps=EmployeeDao.getAllEmployees();
+    	 List<Employee> emps=EmployeeDao.getAllEmployee();
     	 hs.setAttribute("emps",emps);
     	 return "display.jsp";
-     }
-     @RequestMapping("/delete")
-     public ModelAndView deleteEmployee(@RequestParam int id) {
-    	 ModelAndView mav=new ModelAndView("get");
-    	boolean res=EmployeeDao.deleteEmployee1(id);
-    	if(res) {
-    		mav.addObject("msg","data deleted sucessfully");
-    	}
-    	return mav;
      }
 }
     	 
