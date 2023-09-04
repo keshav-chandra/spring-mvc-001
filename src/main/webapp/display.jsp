@@ -15,8 +15,7 @@
 	<th>ID</th>
 	<th>NAME</th>
 	<th>SALARY</th>
-	<th>EDIT</th>
-	<th>DELETE</th>
+	
 </tr>
 
    <%

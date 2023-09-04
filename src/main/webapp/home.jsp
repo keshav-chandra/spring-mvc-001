@@ -10,9 +10,7 @@
 <h1>${msg}</h1>
     <h1 ><a href="emp.jsp">ADD EMPLOYEE</a></h1>
      <h1 ><a href="get">VIEW EMPLOYEE</a></h1>
-      <h1 ><a href="">UPDATE EMPLOYEE</a></h1>
-      <h1 ><a href="">delete EMPLOYEE</a></h1>
-      
+     
 
 </body>
 </html>
